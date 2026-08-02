@@ -251,106 +251,6 @@
   .marquee span em{ color:var(--red); font-style:normal; }
   @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
-
-  /* ============ MOTION VIDEO ============ */
-  .motion{ background:var(--ink); color:var(--cream); padding:120px 0; overflow:hidden; position:relative; }
-  .motion-head{ text-align:center; margin-bottom:56px; }
-  .motion-head h2{ color:var(--cream); margin-top:10px; }
-
-  .motion-frame{
-    position:relative;
-    max-width:920px; margin:0 auto;
-    aspect-ratio:16/9;
-    background:#0c0906;
-  }
-  .motion-mark-wrap{
-    position:absolute; inset:0; z-index:3;
-    display:flex; align-items:center; justify-content:center;
-    background:
-      radial-gradient(ellipse at center, rgba(211,30,40,0.16), transparent 68%),
-      #0c0906;
-  }
-  .motion-mark{
-    font-family:'Archivo Black', sans-serif;
-    font-size:min(28vw, 260px);
-    line-height:1;
-    color:var(--cream);
-    text-shadow:0 0 40px rgba(211,30,40,0.5);
-    animation: motion-float 5s ease-in-out infinite;
-  }
-  @keyframes motion-float{
-    0%,100%{ transform:translateY(0) scale(1); }
-    50%{ transform:translateY(-10px) scale(1.03); }
-  }
-
-  /* HUD corner brackets */
-  .motion-corner{ position:absolute; width:34px; height:34px; z-index:4; pointer-events:none; }
-  .motion-corner::before, .motion-corner::after{ content:""; position:absolute; background:var(--red); }
-  .motion-corner::before{ width:100%; height:2px; }
-  .motion-corner::after{ width:2px; height:100%; }
-  .motion-corner.tl{ top:-10px; left:-10px; }
-  .motion-corner.tr{ top:-10px; right:-10px; transform:scaleX(-1); }
-  .motion-corner.bl{ bottom:-10px; left:-10px; transform:scaleY(-1); }
-  .motion-corner.br{ bottom:-10px; right:-10px; transform:scale(-1,-1); }
-
-  /* faint sci-fi grid behind the frame */
-  .motion-grid{
-    position:absolute; inset:-40px; z-index:1;
-    background-image:
-      linear-gradient(rgba(211,30,40,0.12) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(211,30,40,0.12) 1px, transparent 1px);
-    background-size:28px 28px;
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 78%);
-  }
-
-  /* pulsing rings, echoing the diagonal-cut brand mark */
-  .motion-ring{
-    position:absolute; inset:-2px; z-index:2; pointer-events:none;
-    border:1px solid var(--red);
-    clip-path: polygon(6% 0, 100% 0, 100% 94%, 94% 100%, 0 100%, 0 6%);
-    opacity:0;
-    animation: motion-pulse 3.6s ease-out infinite;
-  }
-  .motion-ring.r2{ animation-delay:1.8s; }
-  @keyframes motion-pulse{
-    0%{ transform:scale(1); opacity:0.55; }
-    100%{ transform:scale(1.06); opacity:0; }
-  }
-
-  /* horizontal scan line sweeping the frame */
-  .motion-scan{
-    position:absolute; left:0; right:0; height:2px; z-index:4; pointer-events:none;
-    background:linear-gradient(90deg, transparent, var(--red), transparent);
-    box-shadow:0 0 12px 2px rgba(211,30,40,0.7);
-    animation: motion-scan 4.5s linear infinite;
-  }
-  @keyframes motion-scan{
-    0%{ top:0; opacity:0; }
-    8%{ opacity:1; }
-    92%{ opacity:1; }
-    100%{ top:100%; opacity:0; }
-  }
-
-  .motion-tag{
-    position:absolute; z-index:4;
-    font-family:'Space Grotesk', monospace; font-size:11px; font-weight:700;
-    letter-spacing:0.08em; color:var(--cream);
-    background:rgba(12,9,6,0.7);
-    padding:5px 10px;
-  }
-  .tag-1{ top:16px; left:16px; color:var(--red); }
-  .tag-1::before{ content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--red); margin-right:6px; animation:motion-blink 1.4s ease-in-out infinite; }
-  .tag-2{ bottom:16px; right:16px; opacity:0.7; }
-  @keyframes motion-blink{ 0%,100%{ opacity:1; } 50%{ opacity:0.2; } }
-
-  @media (prefers-reduced-motion: reduce){
-    .motion-scan, .motion-ring, .tag-1::before, .motion-mark{ animation:none; }
-  }
-  @media (max-width:640px){
-    .motion{ padding:90px 0; }
-    .motion-corner{ width:22px; height:22px; }
-  }
-
   /* ============ CONTACT ============ */
   .contact{ padding:120px 0 100px; }
   .contact .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
@@ -478,7 +378,6 @@
     <div class="nav-links">
       <a href="#servicos">Serviços</a>
       <a href="#sobre">Sobre</a>
-      <a href="#motion">Motion</a>
       <a href="#contato">Contato</a>
     </div>
     <a href="https://wa.me/5595991716411?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20One9%20e%20quero%20turbinar%20minha%20marca%20%F0%9F%9A%80%20Podemos%20conversar%3F" class="nav-cta" target="_blank" rel="noopener">Fale no WhatsApp</a>
@@ -557,29 +456,6 @@
     </div>
     <div class="about-visual reveal" data-tilt data-parallax="-0.08">
       <span class="big9">9</span>
-    </div>
-  </div>
-</section>
-
-<section class="motion" id="motion">
-  <div class="wrap">
-    <div class="motion-head reveal">
-      <h2>Marca em movimento.</h2>
-    </div>
-    <div class="motion-frame reveal">
-      <div class="motion-corner tl"></div>
-      <div class="motion-corner tr"></div>
-      <div class="motion-corner bl"></div>
-      <div class="motion-corner br"></div>
-      <div class="motion-scan"></div>
-      <div class="motion-ring r1"></div>
-      <div class="motion-ring r2"></div>
-      <div class="motion-grid"></div>
-      <div class="motion-mark-wrap">
-        <span class="motion-mark">9</span>
-      </div>
-      <span class="motion-tag tag-1">REC •</span>
-      <span class="motion-tag tag-2">ONE9.MARCA</span>
     </div>
   </div>
 </section>
