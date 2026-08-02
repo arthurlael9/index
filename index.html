@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One9 - Inteligência Artificial Avançada</title>
+    
+    <link rel="canonical" href="https://www.one9.com/">
+    <meta property="og:url" content="https://www.one9.com/">
+    <meta property="og:title" content="One9 - Inteligência Artificial Avançada">
+    <meta property="og:description" content="O seu futuro começa aqui com a inteligência do One9.">
+    
+    <style>
+        :root {
+            --primary-red: #C52229;
+            --primary-red-hover: #A01B21;
+            --cream-bg: #F5F2EB;
+            --card-bg: #EAE6DC;
+            --text-main: #1C1B18;
+            --text-muted: #5C5852;
+            --border-color: rgba(197, 34, 41, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--cream-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(245, 242, 235, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        .btn-cta {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-cta:hover {
+            background-color: var(--primary-red-hover);
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            padding: 180px 20px 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 34, 41, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.1;
+            max-width: 900px;
+            margin-bottom: 24px;
+            letter-spacing: -1.5px;
+            color: var(--text-main);
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 12px 26px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: border-color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-red);
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            color: var(--text-main);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(197, 34, 41, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-red);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="https://www.one9.com" class="logo" aria-label="One9 Home">
+            <img src="https://i.postimg.cc/8cNfw0hc/One9-creative.png" alt="One9 Logo">
+        </a>
+        <nav>
+            <a href="https://www.one9.com/#recursos">Recursos</a>
+            <a href="https://www.one9.com/#sobre">Sobre</a>
+            <a href="https://www.one9.com/#contato">Contato</a>
+        </nav>
+        <a href="https://www.one9.com" class="btn-cta">Começar Agora</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">
+                Inteligência Artificial de Nova Geração
+            </div>
+            <h1>O seu futuro começa aqui com a inteligência do <span>One9</span></h1>
+            <p>Automatize processos, escale sua tomada de decisão e leve a eficiência da sua empresa para o próximo nível com algoritmos avançados e seguros.</p>
+            <div class="hero-buttons">
+                <a href="https://www.one9.com" class="btn-cta">Explorar Plataforma</a>
+                <a href="https://www.one9.com" class="btn-secondary">Ver Documentação</a>
+            </div>
+        </section>
+
+        <section id="recursos" class="features">
+            <h2 class="section-title">Construído para alta performance</h2>
+            <p class="section-subtitle">Tudo o que você precisa para transformar dados complexos em resultados claros.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">01</div>
+                    <h3>Processamento em Tempo Real</h3>
+                    <p>Análises instantâneas de grandes volumes de dados orientadas por redes neurais de última geração.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">02</div>
+                    <h3>Segurança Avançada</h3>
+                    <p>Proteção de dados rigorosa com criptografia de ponta a ponta e total conformidade com padrões globais.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">03</div>
+                    <h3>Integração Fluida</h3>
+                    <p>Conecte facilmente o One9 aos seus sistemas atuais através de APIs robustas e escaláveis.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 One9 AI. Todos os direitos reservados. - <a href="https://www.one9.com" style="color: inherit; text-decoration: none;">www.one9.com</a></p>
+    </footer>
+
+</body>
+</html>
+```[cite: 5, 7]
