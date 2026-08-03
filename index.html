@@ -163,7 +163,7 @@
     border-top:1px solid var(--red);
   }
   .hero-stats div{
-    background:var(--ink); padding:28px 24px 26px 24px;
+    background:var(--ink); padding:28px 26px 32px 24px;
     position:relative;
     transition:background 0.25s ease;
   }
@@ -171,10 +171,14 @@
   .hero-stats div:hover{ background:rgba(211,30,40,0.08); }
   .hero-stats .idx{
     display:block; font-size:12px; font-weight:700; letter-spacing:0.08em;
-    color:var(--red); margin-bottom:10px;
+    color:var(--red); margin-bottom:14px;
   }
-  .hero-stats .num{ font-family:'Archivo Black'; font-size:34px; color:var(--cream); }
-  .hero-stats .label{ font-size:13px; color:rgba(243,238,226,0.55); margin-top:8px; text-transform:uppercase; letter-spacing:0.04em; }
+  .hero-stat-tag{
+    display:block; font-family:'Archivo Black'; font-size:13px;
+    color:var(--red); letter-spacing:0.05em; margin-bottom:14px;
+  }
+  .hero-stat-title{ font-size:21px; color:var(--cream); line-height:1.2; margin-bottom:12px; }
+  .hero-stat-desc{ font-size:14px; line-height:1.55; color:rgba(243,238,226,0.55); max-width:280px; }
 
   /* diagonal seam between hero and next section */
   .seam{
@@ -196,24 +200,107 @@
     margin-bottom:14px; display:block;
   }
 
-  .services-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:2px;
-    background:var(--line);
-    border:1px solid var(--line);
+  /* ============ PHONE 3D SHOWCASE ============ */
+  .phone-stage{
+    display:flex; justify-content:center;
+    padding:70px 0 50px;
+    perspective:1600px;
   }
-  .service-card{
-    background:var(--paper);
-    padding:44px 32px 40px;
-    transition: background 0.3s ease, transform 0.3s ease;
+  .phone-3d{
     position:relative;
+    width:260px; height:540px;
+    transform-style:preserve-3d;
+    transform: rotateZ(var(--prz, -13deg)) rotateY(var(--pry, -38deg)) rotateX(var(--prx, 18deg)) translateY(var(--pty, 0px));
+    transition: transform 0.2s ease-out;
+    will-change: transform;
   }
-  .service-card:hover{ background:var(--ink); transform:translateY(-4px); }
-  .service-card:hover, .service-card:hover .service-desc, .service-card:hover h3{ color:var(--cream); }
-  .service-tag{
-    font-family:'Archivo Black'; font-size:13px; color:var(--red); letter-spacing:0.05em; margin-bottom:22px; display:block;
+  .phone-box{ position:relative; width:100%; height:100%; transform-style:preserve-3d; }
+  .phone-glow{
+    position:absolute; left:50%; top:55%;
+    width:360px; height:360px;
+    background:radial-gradient(circle, rgba(211,30,40,0.32), transparent 70%);
+    transform:translate(-50%,-50%);
+    z-index:-1; filter:blur(14px);
   }
-  .service-card h3{ font-size:26px; margin-bottom:16px; }
-  .service-desc{ font-size:14.5px; color:rgba(24,19,15,0.6); transition:color 0.3s ease; }
+
+  .phone-face{ position:absolute; top:0; left:0; width:260px; height:540px; border-radius:46px; }
+
+  /* back plate — a duplicate rounded plane pushed behind the front; the gap between
+     the two, seen at this angle, reads as real edge thickness without any fold math */
+  .face-back{
+    background:linear-gradient(120deg, #4a4a4a, #0c0c0c 55%);
+    transform:translateZ(-9px);
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  }
+
+  .face-front{
+    transform:translateZ(9px);
+    background:#0a0a0a;
+    box-sizing:border-box;
+    padding:3px;
+    /* thin metallic rim, brighter on the edge that catches the light */
+    background-image:
+      linear-gradient(#0a0a0a, #0a0a0a),
+      linear-gradient(115deg, #6b6b6b 0%, #2b2b2b 18%, #1a1a1a 45%, #3a3a3a 70%, #6b6b6b 100%);
+    background-origin:border-box;
+    background-clip:content-box, border-box;
+    border:3px solid transparent;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.55),
+      inset 0 0 0 1px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .phone-screen{
+    position:relative; width:100%; height:100%;
+    background:var(--ink); border-radius:40px; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .phone-notch{
+    position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    width:76px; height:22px; background:#000; border-radius:14px; z-index:5;
+  }
+
+  .phone-btn{ position:absolute; background:linear-gradient(90deg,#5a5a5a,#2a2a2a); border-radius:1px; z-index:6; }
+  .btn-power{ right:-3px; top:150px; width:3px; height:64px; }
+  .btn-vol-up{ left:-3px; top:118px; width:3px; height:34px; }
+  .btn-vol-down{ left:-3px; top:160px; width:3px; height:34px; }
+
+  .mini-nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:32px 20px 14px;
+  }
+  .mini-logo{ font-family:'Archivo Black'; color:var(--red); font-size:15px; letter-spacing:-0.02em; }
+  .mini-menu{ display:flex; flex-direction:column; gap:3px; }
+  .mini-menu span{ width:16px; height:2px; background:rgba(243,238,226,0.6); display:block; }
+
+  .mini-hero{ flex:1; padding:6px 20px 20px; display:flex; flex-direction:column; justify-content:center; }
+  .mini-eyebrow{ font-size:8px; letter-spacing:0.08em; color:var(--red); text-transform:uppercase; font-weight:700; margin-bottom:10px; }
+  .mini-headline{ display:flex; flex-direction:column; }
+  .mini-headline span{
+    font-family:'Archivo Black'; font-size:22px; line-height:1.05; color:var(--cream);
+  }
+  .mini-headline .accent{ color:var(--red); }
+  .mini-btn{
+    margin-top:16px; align-self:flex-start;
+    background:var(--red); color:var(--cream);
+    font-size:9px; font-weight:700; letter-spacing:0.03em;
+    padding:9px 16px; border-radius:999px;
+  }
+  .mini-stats{
+    margin-top:26px; display:flex; gap:14px;
+    border-top:1px solid rgba(243,238,226,0.12); padding-top:14px;
+  }
+  .mini-stats span{ font-size:9px; font-weight:700; letter-spacing:0.05em; color:rgba(243,238,226,0.55); text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce){
+    .phone-3d{ transition:none; transform:rotateZ(-13deg) rotateY(-38deg) rotateX(18deg); }
+  }
+  @media (max-width:640px){
+    .phone-3d{ width:216px; height:448px; }
+    .phone-face{ width:216px; height:448px; border-radius:40px; }
+    .phone-screen{ border-radius:34px; }
+    .mini-headline span{ font-size:18px; }
+  }
 
   /* ============ ABOUT ============ */
   .about{ background:var(--ink); color:var(--cream); padding:110px 0; position:relative; }
@@ -323,8 +410,7 @@
     .nav-links{ display:none; }
     .hero{ padding:150px 0 90px; }
     .hero-stats{ grid-template-columns:1fr; }
-    .hero-stats div{ padding:22px 0 22px 18px; border-left:2px solid var(--red); }
-    .services-grid{ grid-template-columns:1fr; }
+    .hero-stats div{ padding:22px 16px 22px 18px; border-left:2px solid var(--red); }
     .about .wrap{ grid-template-columns:1fr; }
     .about-visual{ order:-1; max-width:280px; margin:0 auto; }
     .contact .wrap{ grid-template-columns:1fr; }
@@ -396,9 +482,21 @@
       <a href="#servicos" class="btn-ghost">Ver serviços</a>
     </div>
     <div class="hero-stats">
-      <div><span class="idx">01</span><div class="num">SEO</div><div class="label">Busca orgânica</div></div>
-      <div><span class="idx">02</span><div class="num">GEO</div><div class="label">Busca por IA</div></div>
-      <div><span class="idx">03</span><div class="num">Social</div><div class="label">Mídias sociais</div></div>
+      <div>
+        <span class="hero-stat-tag">SEO</span>
+        <h3 class="hero-stat-title">Otimização para Google</h3>
+        <p class="hero-stat-desc">Estrutura técnica, conteúdo estratégico e autoridade de domínio para o seu site subir — e ficar — nas primeiras posições de busca.</p>
+      </div>
+      <div>
+        <span class="hero-stat-tag">GEO</span>
+        <h3 class="hero-stat-title">Otimização para IA</h3>
+        <p class="hero-stat-desc">Preparamos sua marca para ser citada por ChatGPT, Perplexity e Gemini, garantindo presença na nova forma de buscar respostas.</p>
+      </div>
+      <div>
+        <span class="hero-stat-tag">Social Media</span>
+        <h3 class="hero-stat-title">Redes sociais com propósito</h3>
+        <p class="hero-stat-desc">Conteúdo, calendário e comunidade construídos para gerar conversa de verdade — e transformar seguidor em cliente.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -408,29 +506,45 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div>
-        <span class="kicker">O que fazemos</span>
-        <h2>Três frentes, um único objetivo: crescer.</h2>
+        <span class="kicker">Sempre na tela</span>
+        <h2>Seu site, pronto pra converter em qualquer bolso.</h2>
       </div>
-      <p>Cada serviço funciona sozinho — e funciona ainda melhor junto, quando a marca aparece em todo lugar que importa.</p>
+      <p>Rápido, bonito e feito pra funcionar tão bem no celular do seu cliente quanto no computador da sua equipe.</p>
     </div>
   </div>
-  <div class="wrap" style="padding:0;">
-    <div class="services-grid reveal">
-      <div class="service-card">
-        <span class="service-tag">SEO</span>
-        <h3>Otimização para Google</h3>
-        <p class="service-desc">Estrutura técnica, conteúdo estratégico e autoridade de domínio para o seu site subir — e ficar — nas primeiras posições de busca.</p>
+
+  <div class="phone-stage reveal">
+    <div class="phone-3d" id="phone3d">
+      <div class="phone-box">
+        <div class="phone-face face-back"></div>
+        <div class="phone-face face-front">
+          <span class="phone-btn btn-power"></span>
+          <span class="phone-btn btn-vol-up"></span>
+          <span class="phone-btn btn-vol-down"></span>
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="mini-nav">
+              <span class="mini-logo">ONE9</span>
+              <span class="mini-menu">
+                <span></span><span></span><span></span>
+              </span>
+            </div>
+            <div class="mini-hero">
+              <span class="mini-eyebrow">— Agência de marketing</span>
+              <div class="mini-headline">
+                <span>Sua marca</span>
+                <span>não tem tempo</span>
+                <span class="accent">pra fila.</span>
+              </div>
+              <div class="mini-btn">Pedir diagnóstico</div>
+              <div class="mini-stats">
+                <span>SEO</span><span>GEO</span><span>Social</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="service-card">
-        <span class="service-tag">GEO</span>
-        <h3>Otimização para IA</h3>
-        <p class="service-desc">Preparamos sua marca para ser citada por ChatGPT, Perplexity e Gemini, garantindo presença na nova forma de buscar respostas.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-tag">Social Media</span>
-        <h3>Redes sociais com propósito</h3>
-        <p class="service-desc">Conteúdo, calendário e comunidade construídos para gerar conversa de verdade — e transformar seguidor em cliente.</p>
-      </div>
+      <div class="phone-glow"></div>
     </div>
   </div>
 </section>
@@ -576,6 +690,36 @@
       renderer.render(scene, camera);
     }
     requestAnimationFrame(animate);
+  })();
+
+  // 3D phone — rotates and floats as it travels through the viewport on scroll
+  (function initPhone3D(){
+    const phone = document.getElementById('phone3d');
+    if (!phone) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ticking = false;
+    function updatePhone(){
+      const rect = phone.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // progress: -1 when phone is below viewport, 0 centered, 1 when above/past
+      const progress = Math.max(-1, Math.min(1, (vh / 2 - (rect.top + rect.height / 2)) / (vh / 2)));
+      const rotY = -38 + progress * 14;   // gentle sway around the reference pose
+      const rotX = 18 - progress * 6;
+      const rotZ = -13 + progress * 4;
+      const ty = progress * -22;
+      phone.style.setProperty('--pry', rotY + 'deg');
+      phone.style.setProperty('--prx', rotX + 'deg');
+      phone.style.setProperty('--prz', rotZ + 'deg');
+      phone.style.setProperty('--pty', ty + 'px');
+      ticking = false;
+    }
+    function onScroll(){
+      if (!ticking) { requestAnimationFrame(updatePhone); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll);
+    updatePhone();
   })();
 
   // scroll reveal
