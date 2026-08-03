@@ -209,6 +209,7 @@
   .phone-3d{
     position:relative;
     width:260px; height:540px;
+    --phone-h: 540px;
     transform-style:preserve-3d;
     transform: rotateZ(var(--prz, -13deg)) rotateY(var(--pry, -38deg)) rotateX(var(--prx, 18deg)) translateY(var(--pty, 0px));
     transition: transform 0.2s ease-out;
@@ -221,6 +222,46 @@
     background:radial-gradient(circle, rgba(211,30,40,0.32), transparent 70%);
     transform:translate(-50%,-50%);
     z-index:-1; filter:blur(14px);
+    animation: phone-glow-pulse 3.6s ease-in-out infinite;
+  }
+  @keyframes phone-glow-pulse{
+    0%,100%{ opacity:0.7; }
+    50%{ opacity:1; }
+  }
+
+  /* futuristic scan beam — sweeps top to bottom, sits inside the rotated
+     phone group so it travels along with it as the page scrolls */
+  .phone-scan{
+    position:absolute; left:-18px; right:-18px; top:0; height:4px;
+    background:linear-gradient(90deg, transparent, var(--red) 20%, var(--cream) 50%, var(--red) 80%, transparent);
+    box-shadow:0 0 24px 5px rgba(211,30,40,0.85);
+    z-index:8; pointer-events:none;
+    animation: phone-scan-sweep 3.2s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  @keyframes phone-scan-sweep{
+    0%{ transform:translateZ(10px) translateY(-20px); opacity:0; }
+    12%{ opacity:1; }
+    88%{ opacity:1; }
+    100%{ transform:translateZ(10px) translateY(var(--phone-h, 540px)); opacity:0; }
+  }
+
+  /* pulsing diagonal-cut ring, echoing the logo's notch, breathing around the phone */
+  .phone-ring{
+    position:absolute; inset:-16px; z-index:7; pointer-events:none;
+    border:1.5px solid var(--red);
+    border-radius:56px;
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+    opacity:0;
+    animation: phone-ring-pulse 3.2s ease-out infinite;
+  }
+  @keyframes phone-ring-pulse{
+    0%{ transform:scale(0.97); opacity:0.6; }
+    100%{ transform:scale(1.05); opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .phone-scan, .phone-ring, .phone-glow{ animation:none; }
+    .phone-scan{ display:none; }
   }
 
   .phone-face{ position:absolute; top:0; left:0; width:260px; height:540px; border-radius:46px; }
@@ -296,7 +337,7 @@
     .phone-3d{ transition:none; transform:rotateZ(-13deg) rotateY(-38deg) rotateX(18deg); }
   }
   @media (max-width:640px){
-    .phone-3d{ width:216px; height:448px; }
+    .phone-3d{ width:216px; height:448px; --phone-h: 448px; }
     .phone-face{ width:216px; height:448px; border-radius:40px; }
     .phone-screen{ border-radius:34px; }
     .mini-headline span{ font-size:18px; }
@@ -544,6 +585,8 @@
           </div>
         </div>
       </div>
+      <div class="phone-scan"></div>
+      <div class="phone-ring"></div>
       <div class="phone-glow"></div>
     </div>
   </div>
